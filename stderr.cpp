@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     {
           output = o_creat(argv[1],mode);
           
-          dup2(output, STDERR_FILENO) // will redirect output to stderr
+          dup2(output, STDERR_FILENO) /
           if (output < 0) 
           {
             perror(" FILE NOT CREATED" )

@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
       return EXIT_FAILURE;
     }
  
+  
   auto fd = shm_open(REGION_NAME, O_CREAT | O_RDWR, REGION_PERMS);
   if (fd < 0) 
   {
@@ -35,9 +36,41 @@ int main(int argc, char *argv[])
   {
     perror("ftruncate");
     return EXIT_FAILURE;
+  }
   
+  void *ptr = mmap(NULL,REGION_SIZE, PROT_READ, MAP_SHARED, fd, 0);
+  if(ptr == MAP_FAILED)
+  {
+    perror("mmap");
+    return EXIT_FAILURE;
+  }
   
-  
+  dup2(output, STDERR_FILENO)
+    
+ auto child_pid = fork();
+     if (child_pid < 0)
+     {
+        perror("fork");
+        return EXIT_FAILURE;
+     }
 
 
+     if (child_pid == 0)
+     {
+        execvp(argv[2], argv+2)
+     }
 
+     else
+     {
+        int status;
+        auto ok = wait(&status);
+        if (ok < 0)
+        {
+            perror("wait");
+            return EXIT_FAILURE;
+        }
+     }
+  }
+  
+  
+ 
